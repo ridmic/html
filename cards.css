@@ -1,0 +1,278 @@
+/* ******************************** */
+/* Card Wrappers */
+/* ******************************** */
+
+/* Flexible Cards */
+.card-wrapper-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    gap: var(--gap-card);
+    margin-block: var(--gap-card);
+}
+.card-wrapper-flex > * {
+    flex: 1;
+}
+.card-wrapper-flex * {
+    margin: 0;
+    padding: 0;
+}
+
+/* Grid Cards - can be auto-fit or auto-fill */
+.card-wrapper-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(var(--min-card-width), 1fr));
+
+    gap: var(--gap-card);
+    margin-block: var(--gap-card);
+}
+.card-wrapper-grid--fill {
+    grid-template-columns: repeat(auto-fill, minmax(var(--min-card-width), 1fr));
+}
+.card-wrapper-grid * {
+    margin: 0;
+    padding: 0;
+}
+
+/* Use container queries to control the cards if available */
+.card-wrapper-grid .card-container,
+.card-wrapper-flex .card-container {
+    container-type: inline-size;
+
+    min-width: var(--min-card-width);    
+    max-width: var(--max-card-width); 
+}
+
+/* ******************************** */
+/* Basic Card */
+/* ******************************** */
+/* 
+    A Simple stacked responsive card 
+    that accepts header, body and footer.
+*/
+/* ******************************** */
+.card-1 {
+    --_shadow-width: calc(var(--gap-card) / 2);
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;    
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+
+    gap: var(--gap-card);
+
+    border: 1px solid lightgray;
+    box-shadow: var(--_shadow-width) var(--_shadow-width) 5px lightgray;
+
+    height: 100%;
+    padding: var(--gap-card);
+}
+.card-1 > * {
+    flex: 1;
+}
+/* Card Modifiers */
+.card-1--rounded {
+    border-radius: var(--radius-card);
+}
+.card-1--align-left {
+    align-items: flex-start;
+}
+.card-1--align-right {
+    align-items: flex-end;
+}
+
+/* ******************************** */
+/* Side Bard Card */
+/* 
+    A Sidebar / stacked responsive card 
+    that accepts header, body and footer.
+    The card will switch to simple stacked
+    if the container gets to small.
+*/
+/* ******************************** */
+.card-2 {
+    --_shadow-width: calc(var(--gap-card) / 2);
+
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    align-content: space-between;
+    gap: var(--gap-card); 
+
+    border: 1px solid lightgray;
+    box-shadow: var(--_shadow-width) var(--_shadow-width) 5px lightgray;
+
+    height: 100%;
+    padding: var(--gap-card);
+}
+.card-2 .card-sb-left > *,
+.card-2 .card-sb-right > * {
+    flex: 1;
+}
+.card-2 .card-sb-left {
+}
+.card-2 .card-sb-right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-between;
+    gap: var(--gap-card);
+
+    height: 100%;
+    margin-left: var(--gap-card);
+}
+
+/* Card Modifiers */
+.card-2--rounded {
+    border-radius: var(--radius-card);
+}
+.card-2--align-left {
+    align-items: flex-start;
+}
+.card-2--align-right {
+    align-items: flex-end;
+}
+
+/* ******************************** */
+/* Common Card Attributes / Features */
+/* ******************************** */
+
+/* Header Element */
+.card-header {
+    text-align: center;
+}
+.card-header--wide {
+    width: 100%
+}
+.card-1--align-left .card-header--wide,
+.card-2--align-left .card-header--wide {
+    text-align: left;
+}
+.card-1--align-right .card-header--wide,
+.card-2--align-right .card-header--wide {
+    text-align: right;
+}
+.card-1--align-left .card-header,
+.card-2--align-left .card-header {
+    text-align: left;
+}
+.card-1--align-right .card-header,
+.card-2--align-right .card-header {
+    text-align: right;
+}
+
+/* Body Element */
+.card-body {
+    max-width: var(--max-text-width);
+}
+.card-body p {
+    margin-bottom: var(--gap-card);
+}
+.card-1--align-left .card-body
+.card-2--align-left .card-body {
+    text-align: left;
+}
+.card-1--align-right .card-body
+.card-2--align-right .card-body,
+.card-1--align-right p,
+.card-2--align-right p {
+    text-align: right;
+}
+
+/* Footer Element */
+.card-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+.card-footer--wide {
+    width: 100%;
+}
+
+.card-footer a {
+    color: darkgray;
+}
+.card-footer a:hover,
+.card-footer a:focus {
+    color: black;
+}
+
+/* Image Sub-Element */
+.card-image {
+    object-fit: cover;
+    width: 100%;
+    margin: auto;
+}
+.card-image--round {
+    border-radius: 50%;
+}
+.card-image--full {
+    margin-top: calc(var(--gap-card) * -1);
+    margin-left: calc(var(--gap-card) * -1);
+    width: calc(100% + (var(--gap-card) * 2));
+    height: auto;
+}
+
+/* Image Background Sub-Element */
+.card-bkimage {
+    position: absolute;
+    height: 100%;
+    opacity: .4;
+
+    margin-top: calc(var(--gap-card) * -1);
+    object-fit: cover;
+    width: 100%;
+    z-index: -1;
+}
+.card-2 .card-bkimage {
+    margin-left: calc(var(--gap-card) * -1);
+}
+
+/* Button Sub-Element */
+a.card-button{
+    display: block;
+    padding: .5em;
+    width: 100%;
+    border-radius: 0.5em;
+    min-width: max(var(--min-button-width), max-content);
+
+    text-align: center;
+    text-decoration: none; 
+    
+    color: darkgray;
+    border: 2px solid lightgray;
+}
+a.card-button:hover,
+a.card-button:focus {
+    color: black;
+    background-color: lightgray;
+    border: 2px solid darkgray;
+}
+
+/* ******************************** */
+/* container control  */
+/* ******************************** */
+@container (max-width: 400px) {
+    .card-2  {
+        flex-direction: column;
+        align-items: center;
+        align-content: space-between;
+        }
+}
+
+
+/* Dev Only - comment out */
+/* .card-wrapper-grid,
+.card-wrapper-flex {
+    padding: 1em;
+}
+div {
+    border: 1px dashed red;
+} */
