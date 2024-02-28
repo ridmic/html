@@ -16,9 +16,10 @@
     box-sizing: border-box;
 }
 
-section {
+.container {
     max-width: var(--max-screen-width);
     margin-inline: auto;
+    margin-bottom: 2rem;
     padding: 0;    
 }
 
